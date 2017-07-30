@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dev tool</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/jquery-jsonview/1.2.3/jquery.jsonview.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/jsoneditor/5.9.3/jsoneditor.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="http://cdn.bootcss.com/socket.io/2.0.3/socket.io.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-jsonview/1.2.3/jquery.jsonview.js"></script>
+    <script src="http://cdn.bootcss.com/jsoneditor/5.9.3/jsoneditor.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-2">
+            <input type="text" class="form-control" id="address" placeholder="address:port" value="http://127.0.0.1:23256">
+          </div>
+          <div class="col-sm-2">
+            <a class="btn btn-default" id="connect">连接</a>
+            <a class="btn btn-default" id="disconnect" disabled>断开</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-2">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" id="eventName" placeholder="事件名">
+            </div>
+            <div class="form-group">
+              <!-- <textarea class="form-control" rows="3" placeholder="发送数据" id="eventData"></textarea> -->
+              <div id="eventData" style="width: 400px; height: 400px;"></div>
+            </div>
+            <div class="form-group">
+              <a class="btn btn-default" id="emit" disabled>发送</a>
+            </div>
+          </form>
+          <!-- <textarea class="form-control" rows="5" placeholder="返回数据" id="eventResult"></textarea> -->
+          <div id="eventResult"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+  $(function() {
+    var container = document.getElementById("eventData");
+    var options = {};
+    var editor = new JSONEditor(container, options);
+    var socket = null;
+    localStorage.DEBUG = '*';
+    $('#connect').click(function(event) {
+      var address = $('#address').val().trim();
+      socket = io.connect(address);
+
+      socket.on('connect',function() {
+        // 连接成功
+        console.log('连接成功');
+        $('#emit').removeAttr('disabled');
+        $('#disconnect').removeAttr('disabled');
+        $('#connect').attr('disabled','');
+
+        socket.on('chat', function(msg) {
+          console.log(msg);
+        });
+      });
+      socket.on('disconnect',function(data){
+        // 连接断开
+        socket = null;
+        console.log('连接断开');
+      });
+    });
+
+    $('#disconnect').click(function(event) {
+      socket.disconnect();
+      socket = null;
+      $('#emit').attr('disabled', '');
+      $('#disconnect').attr('disabled', '');
+      $('#connect').removeAttr('disabled');
+    });
+
+    $('#emit').click(function(event) {
+      $('#eventResult').val('');
+      if(!!socket) {
+        try {
+          var name = $('#eventName').val().trim();
+          // var data = $('#eventData').val().trim();
+          var data = editor.get();
+          if(!name || !data) {
+            console.log('参数不全');
+            return;
+          }
+          console.log('send', data);
+
+          socket.emit(name, data, function(data) {
+            console.log('recevied', data);
+            var res = JSON.stringify(data);
+            // $('#eventResult').val(res);
+            $("#eventResult").JSONView(res);
+          })
+        } catch (e) {
+          console.error(e);
+        }
+      }else {
+        console.log('未连接');
+      }
+    });
+  })
+  </script>
+</html>
