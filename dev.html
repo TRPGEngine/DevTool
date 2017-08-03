@@ -16,7 +16,7 @@
     <div class="container">
       <div class="form-group">
         <div class="row">
-          <div class="col-sm-4 col-sm-offset-2">
+          <div class="col-sm-4 col-sm-offset-1">
             <input type="text" class="form-control" id="address" placeholder="address:port" value="ws://127.0.0.1:23256">
           </div>
           <div class="col-sm-2">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 col-sm-offset-2">
+        <div class="col-sm-6 col-sm-offset-1">
           <form>
             <div class="form-group">
               <input type="text" class="form-control" id="eventName" placeholder="事件名">
@@ -42,6 +42,11 @@
           <!-- <textarea class="form-control" rows="5" placeholder="返回数据" id="eventResult"></textarea> -->
           <div id="eventResult"></div>
         </div>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="listener" placeholder="添加监听事件名" value="">
+          <a class="btn btn-default" id="addListener" disabled>添加监听</a>
+          <div id="listenerResult"></div>
+        </div>
       </div>
     </div>
   </body>
@@ -52,6 +57,19 @@
     var editor = new JSONEditor(container, options);
     var socket = null;
     localStorage.DEBUG = '*';
+    var enableBtn = function() {
+      $('#emit').removeAttr('disabled');
+      $('#disconnect').removeAttr('disabled');
+      $('#addListener').removeAttr('disabled');
+      $('#connect').attr('disabled','');
+    }
+    var disableBtn = function() {
+      $('#emit').attr('disabled', '');
+      $('#disconnect').attr('disabled', '');
+      $('#addListener').attr('disabled', '');
+      $('#connect').removeAttr('disabled');
+    }
+
     $('#connect').click(function(event) {
       var address = $('#address').val().trim();
       socket = io.connect(address);
@@ -59,27 +77,23 @@
       socket.on('connect',function() {
         // 连接成功
         console.log('连接成功');
-        $('#emit').removeAttr('disabled');
-        $('#disconnect').removeAttr('disabled');
-        $('#connect').attr('disabled','');
-
-        socket.on('chat', function(msg) {
-          console.log(msg);
-        });
+        enableBtn();
+      });
+      socket.on('reconnect',function() {
+        // 连接成功
+        console.log('重新连接成功');
       });
       socket.on('disconnect',function(data){
         // 连接断开
-        socket = null;
         console.log('连接断开');
+        disableBtn();
       });
     });
 
     $('#disconnect').click(function(event) {
       socket.disconnect();
       socket = null;
-      $('#emit').attr('disabled', '');
-      $('#disconnect').attr('disabled', '');
-      $('#connect').removeAttr('disabled');
+      disableBtn();
     });
 
     $('#emit').click(function(event) {
@@ -107,6 +121,27 @@
       }else {
         console.log('未连接');
       }
+    });
+
+    var listenerList = [];
+    $('#addListener').click(function(event) {
+      var name = $('#listener').val().trim();
+      if(!name || !socket) {
+        return;
+      }
+
+      $('#listener').val('');
+      if(listenerList.indexOf(name) >= 0) {
+        console.log('该事件已添加', name);
+        return;
+      }
+      console.log('添加事件', name);
+      listenerList.push(name);
+      socket.on(name, function(data) {
+        console.log('recevied event:', name, data);
+        var res = JSON.stringify(data);
+        $("#listenerResult").JSONView(res).prepend('<h4>'+name+'</h4>');
+      });
     });
   })
   </script>
