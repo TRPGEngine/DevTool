@@ -133,9 +133,11 @@
       $('#listener').val('');
       if(listenerList.indexOf(name) >= 0) {
         console.log('该事件已添加', name);
+        $("#listenerResult").text('该事件已添加:'+name);
         return;
       }
       console.log('添加事件', name);
+      $("#listenerResult").text('添加事件:'+name);
       listenerList.push(name);
       socket.on(name, function(data) {
         console.log('recevied event:', name, data);
