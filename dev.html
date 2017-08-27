@@ -23,6 +23,9 @@
             <a class="btn btn-default" id="connect">连接</a>
             <a class="btn btn-default" id="disconnect" disabled>断开</a>
           </div>
+          <div class="col-sm-2">
+            <a class="btn btn-default" id="autoLogin">自动登录到admin</a>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -145,6 +148,12 @@
         $("#listenerResult").JSONView(res).prepend('<h4>'+name+'</h4>');
       });
     });
+
+    $('#autoLogin').click(function(e) {
+      socket.emit('player::login', {username: 'admin', password: 'admin'}, function(data) {
+        console.log(data);
+      })
+    })
   })
   </script>
 </html>
