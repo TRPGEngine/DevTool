@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server ./ -a 0.0.0.0 -p 9001",
+    "server": "set DEBUG=trpg:* && node script/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
