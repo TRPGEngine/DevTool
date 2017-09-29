@@ -4,8 +4,10 @@ const actor = require('../../Actor/');
 const chat = require('../../Chat/');
 const dice = require('../../Dice/');
 const group = require('../../Group/');
+const file = require('../../File/');
 
 app.load(player);
+app.load(file());
 app.load(actor);
 app.load(chat);
 app.load(dice);

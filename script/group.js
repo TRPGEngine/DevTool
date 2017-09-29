@@ -1,6 +1,7 @@
 // const at = require('trpg-actor-template');
 const at = require('../../ActorTemplate/');
-const socket = require('socket.io-client')('ws://127.0.0.1:23256');
+//const socket = require('socket.io-client')('ws://127.0.0.1:23256');
+const socket = require('socket.io-client')('ws://trpgapi.moonrailgun.com:23256');
 console.log('debug test start');
 
 function request(eventName, data) {

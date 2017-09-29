@@ -26,13 +26,19 @@ async function main() {
     password: 'admin'
   });
   console.log('玩家登陆',admin);
+
   let allTemplate = await request('actor::getTemplate', {});
   console.log('获取所有模板', allTemplate);
-
   if(allTemplate.templates.length === 0) {
     socket.close();
     return;
   }
+
+  let findTemplate = await request('actor::findTemplate', {
+    name: '刀'
+  });
+  console.log('查询模板:', findTemplate);
+  // return;
 
   let createTemplate = await request('actor::createTemplate', {
     name: 'test',
@@ -53,6 +59,18 @@ async function main() {
     uuid: createTemplate.template.uuid,
   })
   console.log('删除模板', delTemplate);
+  console.log('====================');
+
+  let createActor = await request('actor::createActor', {
+    name: '测试人物',
+    desc: '测试数据',
+    info: {
+      力量: 100,
+      敏捷: "20"
+    },
+    template_uuid: findTemplate.templates[0].uuid
+  })
+  console.log('创建人物', createActor);
 
   socket.close();
 }
