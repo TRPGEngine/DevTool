@@ -27,6 +27,7 @@
     "http-server": "^0.10.0"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "socket.io-client": "^2.0.3",
     "trpg-actor-template": "0.0.6"
   }
