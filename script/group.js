@@ -74,7 +74,7 @@ async function sendGroupInvite() {
   await agreeGroupInvite(invite.invite.uuid);
 }
 
-sendGroupInvite();
+// sendGroupInvite();
 
 async function getGroupInvite() {
   let admin2 = await request('player::login', {
@@ -132,3 +132,20 @@ async function addGroupActor(groupUUID, actorUUID) {
   console.log('增加团人物信息:', groupActor);
   console.log("===================================");
 }
+
+async function setPlayerSelectedGroupActor(groupActorUUID) {
+  console.log("===================================");
+  let admin1 = await request('player::login', {
+    username: 'admin',
+    password: 'admin'
+  });
+  let groups = await request('group::getGroupList', {});
+  let res = await request('group::setPlayerSelectedGroupActor', {groupUUID: groups.groups[0].uuid, groupActorUUID});
+  console.log('设置选择角色结果:', res);
+  let res2 = await request('group::getPlayerSelectedGroupActor', {groupUUID: groups.groups[0].uuid, groupMemberUUID: admin1.info.uuid});
+  console.log('获取选择角色结果:', res);
+  socket.close();
+  console.log("===================================");
+}
+
+setPlayerSelectedGroupActor("这是一个测试uuid");
