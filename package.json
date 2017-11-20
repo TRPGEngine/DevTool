@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server ./ -a 0.0.0.0 -p 9001",
-    "server": "set DEBUG=trpg:* && node script/server.js",
+    "server": "cross-env DEBUG=trpg:* node script/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/TRPGEngine/DevTool#readme",
   "devDependencies": {
     "benchmark": "^2.1.4",
+    "cross-env": "^5.1.1",
     "http-server": "^0.10.0"
   },
   "dependencies": {
