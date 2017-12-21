@@ -6,7 +6,7 @@ const chat = require('../../Chat/');
 const dice = require('../../Dice/');
 const group = require('../../Group/');
 const file = require('../../File/');
-const admin = require('../../Admin/');
+const dashboard = require('../../Dashboard/');
 
 app.load(player);
 app.load(file());
@@ -14,6 +14,6 @@ app.load(actor);
 app.load(chat);
 app.load(dice);
 app.load(group);
-app.load(admin);
+app.load(dashboard);
 app.run();
 app.reset();
