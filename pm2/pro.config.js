@@ -5,12 +5,14 @@ module.exports = {
    */
   apps: [{
     name: 'trpg-server',
-    script: 'script/server.js',
+    script: 'script/server-pro.js',
     cwd: '/home/tech/opt/mrg/trpg/DevTool',
     env: {
       NODE_ENV: 'production',
+      //NODE_ENV: 'development',
+      PORT: '23256',
+      VERBOSE: 'true',
       DEBUG: 'trpg:*',
-      PLATFORM: 'web',
     },
   }]
 };
