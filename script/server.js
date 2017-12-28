@@ -16,4 +16,6 @@ app.load(dice);
 app.load(group);
 app.load(dashboard);
 app.run();
-app.reset();
+// app.reset();
+
+module.exports = app;
