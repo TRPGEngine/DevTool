@@ -8,6 +8,7 @@ const group = require('../../Group/');
 const file = require('../../File/');
 const dashboard = require('../../Dashboard/');
 
+app.set('webserviceHomepage', '/admin/home');
 app.load(player);
 app.load(file());
 app.load(actor);
