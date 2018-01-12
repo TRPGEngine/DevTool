@@ -6,7 +6,7 @@ module.exports = {
   apps: [{
     name: 'trpg-client',
     script: './node_modules/.bin/webpack-dev-server',
-    cwd: '/Users/moonrailgun/Develop/Inventory/TRPG/Client',
+    cwd: '../Client',
     args: '--hot --inline --progress --colors --port 8080 --host 0.0.0.0 --config ./config/webpack.config.js',
     max_restarts: 10,
     env: {
@@ -16,7 +16,7 @@ module.exports = {
   }, {
     name: 'trpg-dev-server',
     script: 'script/server.js',
-    cwd: '/Users/moonrailgun/Develop/Inventory/TRPG/DevTool',
+    cwd: './',
     max_restarts: 10,
     env: {
       NODE_ENV: 'development',
@@ -27,7 +27,7 @@ module.exports = {
     name: 'trpg-app-packager',
     script: './node_modules/react-native/local-cli/cli.js',
     args: 'start --root ./src/app',
-    cwd: '/Users/moonrailgun/Develop/Inventory/TRPG/Client',
+    cwd: '../Client',
     max_restarts: 10,
     env: {
       NODE_ENV: 'development',
