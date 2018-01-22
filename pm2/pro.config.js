@@ -7,6 +7,7 @@ module.exports = {
     name: 'trpg-server',
     script: 'script/server-pro.js',
     cwd: '/home/tech/opt/mrg/trpg/DevTool',
+    max_restarts: 10,
     env: {
       NODE_ENV: 'production',
       //NODE_ENV: 'development',

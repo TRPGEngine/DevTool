@@ -1,3 +1,16 @@
+function getIPAdress(){
+  var interfaces = require('os').networkInterfaces();
+  for(var devName in interfaces){
+    var iface = interfaces[devName];
+    for(var i=0;i<iface.length;i++){
+      var alias = iface[i];
+      if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){
+        return alias.address;
+      }
+    }
+  }
+}
+
 module.exports = {
   /**
    * Application configuration section
@@ -16,7 +29,7 @@ module.exports = {
   }, {
     name: 'trpg-dev-server',
     script: 'script/server.js',
-    cwd: './',
+    cwd: '../DevTool',
     max_restarts: 10,
     env: {
       NODE_ENV: 'development',
@@ -31,6 +44,14 @@ module.exports = {
     max_restarts: 10,
     env: {
       NODE_ENV: 'development',
+      PLATFORM: 'app',
+      TRPG_HOST: getIPAdress(),
     }
+  }, {
+    name: 'trpgengine.github.io',
+    script: 'http-server',
+    args: '-p 8088',
+    cwd: '../TRPGEngine.github.io',
+    max_restarts: 10,
   }]
 };

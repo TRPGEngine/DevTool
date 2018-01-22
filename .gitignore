@@ -3,3 +3,4 @@ db/
 public/
 logs/
 .DS_Store
+stat.json
