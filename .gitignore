@@ -5,3 +5,4 @@ logs/
 .DS_Store
 stat.json
 script/docker/.tmp
+package-lock.json
