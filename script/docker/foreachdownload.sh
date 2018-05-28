@@ -10,7 +10,9 @@ pn=(
 "Dice"
 "File"
 "Group"
+"Note"
 "Dashboard"
+"Help"
 )
 
 for p in ${pn[@]}
