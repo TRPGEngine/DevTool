@@ -9,6 +9,7 @@ const file = require('../../File/');
 const dashboard = require('../../Dashboard/');
 const note = require('../../Note/');
 const help = require('../../Help/');
+const qqconnect = require('../../QQConnect/');
 
 app.set('webserviceHomepage', '/admin/home');
 app.load(player);
@@ -20,6 +21,7 @@ app.load(group);
 app.load(dashboard);
 app.load(note);
 app.load(help);
+app.load(qqconnect);
 app.run();
 // app.reset();
 

@@ -13,6 +13,7 @@ pn=(
 "Note"
 "Dashboard"
 "Help"
+"QQConnect"
 )
 
 for p in ${pn[@]}
