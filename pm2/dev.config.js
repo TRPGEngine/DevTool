@@ -36,17 +36,17 @@ module.exports = {
       DEBUG: 'trpg:*',
       PLATFORM: 'web',
     }
-//  }, {
-//    name: 'trpg-app-packager',
-//    script: './node_modules/react-native/local-cli/cli.js',
-//    args: 'start --root ./src/app',
-//    cwd: '../Client',
-//    max_restarts: 10,
-//    env: {
-//      NODE_ENV: 'development',
-//      PLATFORM: 'app',
-//      TRPG_HOST: getIPAdress(),
-//    }
+ }, {
+   name: 'trpg-app-packager',
+   script: './node_modules/react-native/local-cli/cli.js',
+   args: 'start --root ./src/app',
+   cwd: '../Client',
+   max_restarts: 10,
+   env: {
+     NODE_ENV: 'development',
+     PLATFORM: 'app',
+     TRPG_HOST: getIPAdress(),
+   }
   }, {
     name: 'trpgengine.github.io',
     script: 'http-server',
