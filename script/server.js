@@ -1,5 +1,5 @@
 // const app = require('../../Core/')();
-const app = require('../../Core/')({storageUrl: 'mysql://root:@localhost/trpg'});
+const app = require('../../Core/')({storageUrl: 'mysql://root:@localhost/trpg?debug=true'});
 const player = require('../../Player/');
 const actor = require('../../Actor/');
 const chat = require('../../Chat/');
