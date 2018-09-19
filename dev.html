@@ -150,7 +150,8 @@
     });
 
     $('#autoLogin').click(function(e) {
-      socket.emit('player::login', {username: 'admin', password: 'admin'}, function(data) {
+      // 21232f297a57a5a743894a0e4a801fc3 是admin的md5编码
+      socket.emit('player::login', {username: 'admin', password: '21232f297a57a5a743894a0e4a801fc3'}, function(data) {
         console.log(data);
       })
     })
