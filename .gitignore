@@ -6,3 +6,4 @@ logs/
 stat.json
 script/docker/.tmp
 package-lock.json
+script/auto_build/server.js
