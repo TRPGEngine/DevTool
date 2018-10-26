@@ -14,6 +14,7 @@ const report = require('../../Report/');
 const mail = require('../../Mail/');
 
 app.set('webserviceHomepage', '/admin/home');
+app.set('apihost', 'http://127.0.0.1:23256');
 app.load(player);
 app.load(file());
 app.load(actor);
