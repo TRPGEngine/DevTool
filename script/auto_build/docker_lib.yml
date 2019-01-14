@@ -2,13 +2,14 @@ version: '3'
 services:
   mysql:
     ports:
-      - "3306:3306"
+      - "3306"
     volumes:
       - ./mysql/conf:/etc/mysql/conf.d
       - ./mysql/logs:/logs
       - ./mysql/data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=trpggame
+      - MYSQL_DATABASE=trpg
     image: "mysql:5.7.21"
     networks:
       default:
