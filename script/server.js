@@ -1,5 +1,7 @@
+const config = require('./config/trpg');
+
 // const app = require('../../Core/')();
-const app = require('../../Core/')({storageUrl: 'mysql://root:@localhost/trpg?debug=true'});
+const app = require('../../Core/')(config);
 const player = require('../../Player/');
 const actor = require('../../Actor/');
 const chat = require('../../Chat/');
@@ -13,8 +15,6 @@ const qqconnect = require('../../QQConnect/');
 const report = require('../../Report/');
 const mail = require('../../Mail/');
 
-app.set('webserviceHomepage', '/admin/home');
-app.set('apihost', 'http://127.0.0.1:23256');
 app.load(player);
 app.load(file());
 app.load(actor);
