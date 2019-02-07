@@ -21,12 +21,12 @@ class TRPGEnvironment extends NodeEnvironment {
     this.global.trpgapp = trpgapp;
     this.global.db = db;
     this.global.testEvent = (eventFn, data) => {
-      // 测试发送socket时事件数据方法
+      // 测试直接处理信息
       return new Promise(async function (resolve) {
         try {
           let ret = await eventFn.call({
             app: trpgapp,
-            socket
+            socket: null
           }, data, (_res) => {
             resolve(_res)
           }, db);
@@ -43,6 +43,14 @@ class TRPGEnvironment extends NodeEnvironment {
         }catch(e) {
           resolve({result: false, msg: e.toString()})
         }
+      })
+    }
+    this.global.emitEvent = (eventName, data) => {
+      // 发送信息测试
+      return new Promise((resolve) => {
+        socket.emit(eventName, data, function(_res) {
+          resolve(_res);
+        })
       })
     }
 
