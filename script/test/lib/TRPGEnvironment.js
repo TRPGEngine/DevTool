@@ -24,11 +24,12 @@ class TRPGEnvironment extends NodeEnvironment {
       // 测试直接处理信息
       return new Promise(async function (resolve) {
         try {
+          let cbres = {result: false}; // 默认返回信息
           let ret = await eventFn.call({
             app: trpgapp,
             socket: null
           }, data, (_res) => {
-            resolve(_res)
+            cbres = _res; // 只收集cb返回的最后的响应
           }, db);
 
           if(ret !== undefined) {
@@ -39,6 +40,9 @@ class TRPGEnvironment extends NodeEnvironment {
             }else {
               resolve(ret);
             }
+          }else {
+            // 从cb中取结果
+            resolve(cbres);
           }
         }catch(e) {
           resolve({result: false, msg: e.toString()})
