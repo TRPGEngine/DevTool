@@ -9,4 +9,4 @@ package-lock.json
 script/auto_build/server.js
 script/auto_build/server/
 script/auto_build/mysql/
-
+config/local.js

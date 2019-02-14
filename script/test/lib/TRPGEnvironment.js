@@ -1,6 +1,6 @@
 const NodeEnvironment = require('jest-environment-node');
 const io = require('socket.io-client');
-const config = require('../../config/trpg');
+const config = require('config');
 const trpgapp = require('../../server');
 const socket = io('ws://127.0.0.1:23256', {
   autoConnect: false

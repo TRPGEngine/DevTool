@@ -16,5 +16,5 @@ module.exports = {
     }
   },
   webserviceHomepage: '/admin/home',
-  apihost: 'http://127.0.0.1:23256',
+  apihost: 'http://127.0.0.1:23256'
 }
