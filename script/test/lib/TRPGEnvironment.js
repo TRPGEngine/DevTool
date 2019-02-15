@@ -1,3 +1,4 @@
+const debug = require('debug')('trpg:devtool')
 const NodeEnvironment = require('jest-environment-node');
 const io = require('socket.io-client');
 const config = require('config');
@@ -13,7 +14,7 @@ class TRPGEnvironment extends NodeEnvironment {
   }
 
   async setup() {
-    console.log('Setup TRPG Test Environment');
+    debug('Setup TRPG Test Environment');
 
     socket.open();
 
@@ -62,7 +63,7 @@ class TRPGEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    console.log('Teardown TRPG Test Environment');
+    debug('Teardown TRPG Test Environment');
 
     socket.close();
     trpgapp.close();
