@@ -2,11 +2,18 @@ const debug = require('debug')('trpg:devtool')
 const NodeEnvironment = require('jest-environment-node');
 const io = require('socket.io-client');
 const config = require('config');
-const trpgapp = require('../../server');
+const loadModules = require('../../loadModules');
+let trpgapp = null;
 const socket = io('ws://127.0.0.1:23256', {
   autoConnect: false
 });
-const db = trpgapp.storage.db;
+
+function generateTRPGInstance() {
+  let app = require('../../../../Core')(config);
+  loadModules(app);
+  app.run();
+  return app;
+}
 
 class TRPGEnvironment extends NodeEnvironment {
   constructor(config) {
@@ -17,6 +24,10 @@ class TRPGEnvironment extends NodeEnvironment {
     debug('Setup TRPG Test Environment');
 
     socket.open();
+
+    // 创建trpg实例
+    trpgapp = generateTRPGInstance();
+    const db = trpgapp.storage.db;
 
     // 声明沙盒内可用的全局变量
     this.global.trpgapp = trpgapp;
@@ -66,7 +77,11 @@ class TRPGEnvironment extends NodeEnvironment {
     debug('Teardown TRPG Test Environment');
 
     socket.close();
-    trpgapp.close();
+    if(trpgapp) {
+      // TODO: trpg还是没有关闭所有的连接, 可以考虑将其放到下一级(测试文件级)
+      await trpgapp.close();
+      trpgapp = null;
+    }
 
     await super.teardown();
   }
