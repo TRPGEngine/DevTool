@@ -32,6 +32,7 @@ class TRPGEnvironment extends NodeEnvironment {
     // 声明沙盒内可用的全局变量
     this.global.trpgapp = trpgapp;
     this.global.db = db;
+    this.global.socket = socket;
     this.global.testEvent = (eventFn, data) => {
       // 测试直接处理信息
       return new Promise(async function (resolve) {
