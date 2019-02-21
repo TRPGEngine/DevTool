@@ -1,6 +1,7 @@
 const debug = require('debug')('trpg:devtool')
 const NodeEnvironment = require('jest-environment-node');
 const io = require('socket.io-client');
+const lodash = require('lodash');
 const config = require('config');
 const loadModules = require('../../loadModules');
 let trpgapp = null;
@@ -30,6 +31,7 @@ class TRPGEnvironment extends NodeEnvironment {
     const db = trpgapp.storage.db;
 
     // 声明沙盒内可用的全局变量
+    this.global._ = lodash;
     this.global.trpgapp = trpgapp;
     this.global.db = db;
     this.global.socket = socket;
