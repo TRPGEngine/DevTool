@@ -1,3 +1,5 @@
+const randomString = require('crypto-random-string');
+
 module.exports = {
   db: {
     database: 'trpg',
@@ -14,6 +16,13 @@ module.exports = {
         idle: 10000
       },
     }
+  },
+  dashboard: {
+    // dashboard模块网页端的账号密码
+    admin: [{
+      username: 'trpgadmin',
+      password: randomString(16)
+    }]
   },
   webserviceHomepage: '/admin/home',
   apihost: 'http://127.0.0.1:23256'
