@@ -2,6 +2,7 @@ const debug = require('debug')('trpg:devtool')
 const NodeEnvironment = require('jest-environment-node');
 const io = require('socket.io-client');
 const lodash = require('lodash');
+const randomString = require('crypto-random-string');
 const config = require('config');
 const loadModules = require('../../loadModules');
 let trpgapp = null;
@@ -71,6 +72,9 @@ class TRPGEnvironment extends NodeEnvironment {
           resolve(_res);
         })
       })
+    }
+    this.global.generateRandomStr = (length = 10) => {
+      return randomString(length);
     }
 
     await super.setup();
