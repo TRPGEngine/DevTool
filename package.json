@@ -7,7 +7,9 @@
     "start": "http-server ./ -a 0.0.0.0 -p 9001",
     "server": "cross-env DEBUG=trpg:* node script/server.js",
     "pm2": "pm2 start ./pm2/dev.config.js",
-    "test": "jest --config=./script/test/jest.config.js --runInBand"
+    "test": "jest --config=./script/test/jest.config.js --runInBand",
+    "db:migrate:generate": "makemigration --models-path ./db/models.js --migrations-path ./db/migrations",
+    "db:migrate:run": "runmigration --models-path ./db/models.js --migrations-path ./db/migrations"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,7 @@
     "crypto-random-string": "^1.0.0",
     "debug": "^4.1.1",
     "lodash": "^4.17.4",
+    "sequelize-auto-migrations": "^1.0.3",
     "socket.io-client": "^2.0.3",
     "trpg-actor-template": "^0.1.0"
   }
