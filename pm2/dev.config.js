@@ -20,7 +20,7 @@ module.exports = {
     name: 'trpg-client',
     script: './node_modules/.bin/webpack-dev-server',
     cwd: '../Client',
-    args: '--hot --inline --progress --colors --port 8080 --host 0.0.0.0 --config ./config/webpack.config.js',
+    args: '--hot --inline --progress --colors --port 8089 --host 0.0.0.0 --config ./config/webpack.config.js',
     max_restarts: 10,
     env: {
       NODE_ENV: 'development',
