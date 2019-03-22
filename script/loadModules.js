@@ -16,14 +16,14 @@ module.exports = function loadModules(app) {
   app.load(file());
   app.load(actor);
   app.load(chat);
-  app.load(dice);
+  app.load(dice); // 尚未测试
   app.load(group);
-  app.load(dashboard);
-  app.load(note);
+  app.load(dashboard); // 尚未测试
+  app.load(note); // 尚未测试
   app.load(help);
-  app.load(qqconnect);
-  app.load(report);
-  app.load(mail);
+  app.load(qqconnect); // 尚未测试
+  app.load(report); // 尚未测试
+  app.load(mail); // 尚未测试
 
   return app;
 }
